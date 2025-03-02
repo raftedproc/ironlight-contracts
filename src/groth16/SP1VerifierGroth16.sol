@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {ISP1Verifier, ISP1VerifierWithHash} from "./ISP1Verifier.sol";
+import {ISP1Verifier, ISP1VerifierWithHash} from "../ISP1Verifier.sol";
 import {Groth16Verifier} from "./Groth16Verifier.sol";
 
 /// @title SP1 Verifier
@@ -23,7 +23,7 @@ contract SP1Verifier is Groth16Verifier, ISP1VerifierWithHash {
 
     /// @inheritdoc ISP1VerifierWithHash
     function VERIFIER_HASH() public pure returns (bytes32) {
-        return 0x873b8973ee98b9a08e8352482b7eb705df944ed3346f3096acc783faddcd3b6a;
+        return 0x689f62797a10e8109781b11f9da22a12bb0a125054c28a1e45ecbda11463bbcd;
     }
 
     /// @notice Hashes the public values to a field elements inside Bn254.
