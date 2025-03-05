@@ -12,10 +12,12 @@ contract CallVerifyProof is Script {
         address verifierAddress = vm.envAddress("VERIFIER_ADDRESS");
         uint256 tries = vm.envUint("CALLS_TRIES");
         uint[] memory timings = new uint256[](tries);
+        uint start = vm.unixTime();
 
         for (uint i = 0; i < tries; i++) {
-            uint start = vm.unixTime();
             // uint256 gasBefore = gasleft();
+            uint loopStart = vm.unixTime();
+
 
             ISP1Verifier(verifierAddress).verifyProof(
                 programVKey,
@@ -23,13 +25,11 @@ contract CallVerifyProof is Script {
                 proofBytes
             );
 
-            // uint256 gasAfter = gasleft();
-            uint end = vm.unixTime();
-            timings[i] = end - start;
-            // console.log("Groth16 proof is valid");
-            // console.log("Execution time: ", end - start, "milliseconds");
-            // console.log("Gas used:", gasBefore - gasAfter);
+            uint loopEnd = vm.unixTime();
+            timings[i] = loopEnd - loopStart;
         }
+        uint end = vm.unixTime();
+        console.log("Total execution time: ", end - start, "milliseconds");
 
         sort(timings);
         console.log("P75: ", percentile(timings, 75), "milliseconds");
@@ -43,7 +43,6 @@ contract CallVerifyProof is Script {
         require(arr.length > 0, "Empty array");
 
         if (p >= 100) {
-            // 100-й процентиль — максимум, а значит arr[arr.length - 1]
             return arr[arr.length - 1];
         }
 
