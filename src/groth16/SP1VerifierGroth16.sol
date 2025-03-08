@@ -23,7 +23,7 @@ contract SP1Verifier is Groth16Verifier, ISP1VerifierWithHash {
 
     /// @inheritdoc ISP1VerifierWithHash
     function VERIFIER_HASH() public pure returns (bytes32) {
-        return 0x689f62797a10e8109781b11f9da22a12bb0a125054c28a1e45ecbda11463bbcd;
+        return 0xbeeded8f93d6e0fdf08792f7a143d8f4cb96a6b03ac55da8d5c54a6a916a4b44;
     }
 
     /// @notice Hashes the public values to a field elements inside Bn254.
